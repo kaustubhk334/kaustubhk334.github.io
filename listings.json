@@ -2,6 +2,9 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/classification/Classification.html",
+      "/posts/linear-regression/LinearRegression.html",
+      "/posts/nonlinear-regression/NonlinearRegression.html",
       "/posts/post-with-code/index.html",
       "/posts/welcome/index.html"
     ]

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>What is Classification?</title>
+<title>Mlblog - What is Classification?</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,45 +57,114 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="Classification_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Classification_files/libs/quarto-html/quarto.js"></script>
-<script src="Classification_files/libs/quarto-html/popper.min.js"></script>
-<script src="Classification_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="Classification_files/libs/quarto-html/anchor.min.js"></script>
-<link href="Classification_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Classification_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="Classification_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="Classification_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Classification_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="fullcontent">
+<body class="nav-fixed fullcontent">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">What is Classification?</h1>
-</div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Mlblog</span>
+    </a>
   </div>
-  
-
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
 </header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">What is Classification?</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
 
 <p>Classification is assigning some label to an input value based on some predictor variables. These labels are predefined and predictions are made based on previous predictions on similar data. There are various classifcation techniques such as Naive Bayes, K-Nearest-Neighbors, Logistic Regression, SVMs, etc. The most simple form of classification is Binary Classification, where one of two labels can be chosen from. Some use cases are image classification, spam filtering, or even medical diagnosis. One tough part with classification is especially with supervised learning techniques, the data has to be labeled into the categories which requires manual effort.</p>
 <section id="sms-spam-dataset" class="level3">
@@ -245,7 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>hamWords <span class="op">=</span> wc.generate(df[df[<span class="st">'label'</span>] <span class="op">==</span> <span class="dv">0</span>][<span class="st">'sms'</span>].<span class="bu">str</span>.cat(sep<span class="op">=</span><span class="st">" "</span>))</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.imshow(hamWords)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>&lt;matplotlib.image.AxesImage at 0x1ab99a7ac90&gt;</code></pre>
+<pre><code>&lt;matplotlib.image.AxesImage at 0x295a5656810&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="Classification_files/figure-html/cell-7-output-2.png" width="575" height="306"></p>
@@ -255,7 +324,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>spamWords <span class="op">=</span> wc.generate(df[df[<span class="st">'label'</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">'sms'</span>].<span class="bu">str</span>.cat(sep<span class="op">=</span><span class="st">" "</span>))</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.imshow(spamWords)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>&lt;matplotlib.image.AxesImage at 0x1ab995e3150&gt;</code></pre>
+<pre><code>&lt;matplotlib.image.AxesImage at 0x295a5672610&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="Classification_files/figure-html/cell-8-output-2.png" width="575" height="306"></p>
@@ -332,12 +401,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>              precision    recall  f1-score   support
 
-           0       0.98      0.92      0.95       851
-           1       0.60      0.88      0.71       113
+           0       0.98      0.91      0.94       849
+           1       0.57      0.88      0.69       115
 
-    accuracy                           0.92       964
-   macro avg       0.79      0.90      0.83       964
-weighted avg       0.94      0.92      0.92       964
+    accuracy                           0.91       964
+   macro avg       0.77      0.89      0.82       964
+weighted avg       0.93      0.91      0.91       964
 </code></pre>
 </div>
 </div>
@@ -359,11 +428,11 @@ weighted avg       0.94      0.92      0.92       964
 <div class="cell-output cell-output-stdout">
 <pre><code>              precision    recall  f1-score   support
 
-           0       0.98      1.00      0.99       851
-           1       0.98      0.88      0.93       113
+           0       0.98      0.99      0.99       849
+           1       0.94      0.86      0.90       115
 
     accuracy                           0.98       964
-   macro avg       0.98      0.94      0.96       964
+   macro avg       0.96      0.93      0.94       964
 weighted avg       0.98      0.98      0.98       964
 </code></pre>
 </div>
@@ -387,20 +456,21 @@ weighted avg       0.98      0.98      0.98       964
 <div class="cell-output cell-output-stdout">
 <pre><code>              precision    recall  f1-score   support
 
-           0       0.98      1.00      0.99       851
-           1       1.00      0.82      0.90       113
+           0       0.97      1.00      0.99       849
+           1       0.99      0.81      0.89       115
 
     accuracy                           0.98       964
-   macro avg       0.99      0.91      0.95       964
+   macro avg       0.98      0.90      0.94       964
 weighted avg       0.98      0.98      0.98       964
 </code></pre>
 </div>
 </div>
 <p>The SVM classifier also gave a good accuracy</p>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
