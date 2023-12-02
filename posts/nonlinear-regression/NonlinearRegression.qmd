@@ -1,0 +1,192 @@
+---
+title: 'What is Nonlinear Regression?'
+jupyter: python3
+---
+
+Nonlinear, like linear regression tries to model a relation between independent and dependent variables using a function. However, linear regression follows a traditional y=mx+b line graph, while nonlinear relations can have more complex functions of different orders. Some example functions are quadratic, exponential, logistic, logarithmic, etc. To find the fitness of the nonlinear regression model, a sum of squares is used (calculating the difference of the mean of the data and each point). Use cases for nonlinear regression consist of any time of nonlinear data, such as population growth over time, stock market forecasting, etc. 
+
+
+### Some types of Nonlinear Regression ###
+
+### Quadratic ###
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+def quadratic(x, a, b, c):
+    return a * x**2 + b * x + c
+
+x = np.linspace(-10, 10, 100)
+
+a = 1
+b = 2
+c = 1
+
+y = quadratic(x, a, b, c)
+
+num_points = 50
+randX = np.random.uniform(-8, 8, num_points)
+randY = quadratic(randX, a, b, c) + np.random.normal(0, 5, num_points)
+
+plt.plot(x, y)
+plt.scatter(randX, randY, color='red', label='Random Data Points')
+
+plt.title('Quadratic Function with Scatter Plot')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.axhline(0, color='k', linewidth=0.5)
+plt.axvline(0, color='k', linewidth=0.5)
+plt.grid(color='y', linestyle='--', linewidth=0.5)
+plt.legend()
+plt.show()
+```
+
+### Exponential ####
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+def exponential(x, a, b):
+    return a * np.exp(b * x)
+
+x = np.linspace(-10, 10, 100)
+
+a = 2
+b = 1
+
+y = exponential(x, a, b)
+
+num_points = 50
+randX = np.random.uniform(-8, 8, num_points)
+randY = exponential(randX, a, b) + np.random.normal(0, 5, num_points)
+
+plt.plot(x, y)
+plt.scatter(randX, randY, color='red', label='Random Data Points')
+
+plt.title('Exponential Function with Scatter Plot')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.axhline(0, color='k', linewidth=0.5)
+plt.axvline(0, color='k', linewidth=0.5)
+plt.grid(color='y', linestyle='--', linewidth=0.5)
+plt.legend()
+plt.show()
+```
+
+### Logistic ###
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+def logistic(x, a, b):
+    return 1 / (1 +np.exp(-a*(x-b)))
+
+x = np.linspace(-10, 10, 100)
+
+a = 1
+b = 2
+
+y = logistic(x, a, b)
+
+num_points = 50
+randX = np.random.uniform(-8, 8, num_points)
+randY = logistic(randX, a, b) + np.random.normal(0, 5, num_points)
+
+plt.plot(x, y)
+plt.scatter(randX, randY, color='red', label='Random Data Points')
+
+plt.title('Logistic Function with Scatter Plot')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.axhline(0, color='k', linewidth=0.5)
+plt.axvline(0, color='k', linewidth=0.5)
+plt.grid(color='y', linestyle='--', linewidth=0.5)
+plt.legend()
+plt.show()
+```
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+def logarithmic(x, a, b):
+    return a * np.log(x) + b
+
+x = np.linspace(0.1, 10, 100)
+
+a = 2
+b = 1
+
+y = logarithmic(x, a, b)
+
+num_points = 50
+randX = np.random.uniform(0.1, 8, num_points)
+randY = logarithmic(randX, a, b) + np.random.normal(0, 5, num_points)
+
+plt.plot(x, y)
+plt.scatter(randX, randY, color='red', label='Random Data Points')
+
+plt.title('Logarithmic Function with Scatter Plot')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.axhline(0, color='k', linewidth=0.5)
+plt.axvline(0, color='k', linewidth=0.5)
+plt.grid(color='y', linestyle='--', linewidth=0.5)
+plt.legend()
+plt.show()
+```
+
+### World GDP Dataset ###
+For this nonlinear regression analysis we will use a dataset of World GDP over time. The data just shows how World GDP changed every year and we can use some form of nonlinear regression to predict how it will be in the future. Nonlinear regression is great for time series data. This dataset is publicly available.
+
+```{python}
+import pandas as pd
+df = pd.read_csv('Worldgdp.csv')
+df.describe()
+```
+
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.regplot(df, x='Year', y='GDP')
+```
+
+As we can see, linear regression doesn't show a good prediction of future GDP so we need to use one of the nonlinear regression functions. Just intuitively from the graph, we can see that a logistic function will probably fit the function closely. We can use scipy to optimize the function.
+
+def logistic(x, a, b):
+    return 1 / (1 +np.exp(-a*(x-b)))
+
+Y_pred = logistic(df['Year'], 0.1 , 2000)
+plt.plot(df['Year'], Y_pred*1e14)
+plt.plot(df['Year'], df['GDP'], 'g.')
+
+```{python}
+from scipy.optimize import curve_fit
+xVals = df['Year'] / max(df['Year'])
+yVals = df['GDP'] / max(df['GDP'])
+(a, b), _ = curve_fit(logistic, xVals, yVals)
+```
+
+```{python}
+x = np.linspace(min(df['Year']), max(df['Year']))
+x /= max(x)
+y = logistic(x, a, b)
+plt.plot(xVals* max(df['Year']), yVals*max(df['GDP']), 'g.')
+plt.plot(x*max(df['Year']),y*max(df['GDP']), linewidth=2.0)
+plt.ylabel('World GDP')
+plt.xlabel('Year')
+plt.show()
+```
+
+We can intuitively see that scipy managed to fit the logistic function appropriately with our data and it resembles pretty closely
+
+Lets predict world GDP in 2030 using the nonlinear regression model
+
+```{python}
+(logistic([2035/max(df['Year'])], a, b) * 1e14)[0]
+```
+
+
