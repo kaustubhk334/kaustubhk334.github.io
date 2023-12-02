@@ -1,0 +1,150 @@
+---
+title: 'What is Classification?'
+jupyter: python3
+---
+
+Classification is assigning some label to an input value based on some predictor variables. These labels are predefined and predictions are made based on previous predictions on similar data. There are various classifcation techniques such as Naive Bayes, K-Nearest-Neighbors, Logistic Regression, SVMs, etc. The most simple form of classification is Binary Classification, where one of two labels can be chosen from. Some use cases are image classification, spam filtering, or even medical diagnosis. One tough part with classification is especially with supervised learning techniques, the data has to be labeled into the categories which requires manual effort.
+
+
+### SMS Spam Dataset ###
+We will use an SMS Spam dataset from Kaggle to determine if a message is spam or not. We will use different techniques to determine whether there is spam in a message.
+
+```{python}
+import pandas as pd
+df = pd.read_csv('spam.csv', encoding='ISO-8859-1')
+df.describe()
+```
+
+### Cleaning ###
+This dataset needs a lot of cleaning. Ham: 0, Spam: 1.
+
+```{python}
+df = df.drop(["Unnamed: 2", "Unnamed: 3", "Unnamed: 4"], axis=1)
+df = df.rename(columns={"v1":"label", "v2":"sms"})
+df['label'] = df['label'].map({'ham':0, 'spam':1})
+df.head()
+```
+
+```{python}
+df.drop_duplicates(inplace=True)
+```
+
+Visualization the lengths of the messages and different types of words can help us determine their correct classification
+
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df["len"] = df["sms"].apply(len)
+df['len'].plot(bins=50, kind='hist')
+plt.ylabel("Count")
+plt.ylabel("Num chars")
+plt.show()
+```
+
+```{python}
+df.hist(column='len', by='label', bins=50)
+```
+
+```{python}
+from wordcloud import WordCloud
+wc = WordCloud()
+hamWords = wc.generate(df[df['label'] == 0]['sms'].str.cat(sep=" "))
+plt.imshow(hamWords)
+```
+
+```{python}
+spamWords = wc.generate(df[df['label'] == 1]['sms'].str.cat(sep=" "))
+plt.imshow(spamWords)
+```
+
+### Preprocessing ###
+Preprocessing is a huge process before text classification. We need to figure out a way to remove common words (stopwords) so they don't affect our model. We also need to develop some system for our classification purposes. NLTK library is commonly used for this.
+
+```{python}
+import nltk
+import re
+nltk.download("stopwords")   
+from nltk.corpus import stopwords
+from nltk.stem.porter import PorterStemmer
+ps=PorterStemmer()
+```
+
+```{python}
+corpus = []
+labels = []
+for i in range(0, len(df)):
+    try:
+        cleaned = re.sub('^[a-zA-Z]',' ', df['sms'][i])
+        cleaned = cleaned.lower()
+        cleaned.split()
+        cleaned=[ps.stem(cleaned) for word in cleaned if not word in stopwords.words('english')]
+        cleaned = ''.join(cleaned)
+        corpus.append(cleaned)
+        labels.append(df['label'][i])
+    except KeyError as err:
+        continue
+```
+
+```{python}
+from sklearn.feature_extraction.text import CountVectorizer
+cv=CountVectorizer()
+X=cv.fit_transform(corpus).toarray()
+Y=labels
+X
+```
+
+```{python}
+from sklearn.model_selection import train_test_split
+xTrain, xTest, yTrain, yTest = train_test_split(X, Y, test_size=0.2)
+```
+
+### Naive Bayes Method ###
+This method uses Bayes Theorem and considers that features are independent of each other. It will consider the individual words in an sms independent and determine the probability of spam/ham using the classic Bayes Theorem formula.
+
+```{python}
+from sklearn.naive_bayes import GaussianNB
+nb = GaussianNB()
+nb.fit(xTrain, yTrain)
+```
+
+```{python}
+yPred = nb.predict(xTest)
+from sklearn.metrics import classification_report
+print(classification_report(yTest, yPred))
+```
+
+We can see Naive Bayes gave us a 0.91 accuracy score
+
+### Logistic Regression Classification ###
+
+```{python}
+from sklearn.linear_model import LogisticRegression
+lr = LogisticRegression(max_iter=500)
+lr.fit(xTrain, yTrain)
+```
+
+```{python}
+yPred = lr.predict(xTest)
+print(classification_report(yTest, yPred))
+```
+
+We got a slightly higher accuracy with the LogisticRegression model
+
+### SVM Classifier ###
+This classifier works by setting a hyperplane of some features and dividng the data into two sides of the hyperplane. One side will be classified as spam and the other as ham. SVM is computationally expensive but works well on smaller datasets.
+
+```{python}
+from sklearn import svm
+svc = svm.SVC()
+svc.fit(xTrain, yTrain)
+```
+
+```{python}
+yPred = svc.predict(xTest)
+print(classification_report(yTest, yPred))
+```
+
+The SVM classifier also gave a good accuracy
+
+
