@@ -1,6 +1,8 @@
 ---
-title: 'What is Classification?'
-jupyter: python3
+title: "Classification"
+author: "Kaustubh Kale"
+date: "2023-11-23"
+categories: [news, code, analysis]
 ---
 
 Classification is assigning some label to an input value based on some predictor variables. These labels are predefined and predictions are made based on previous predictions on similar data. There are various classifcation techniques such as Naive Bayes, K-Nearest-Neighbors, Logistic Regression, SVMs, etc. The most simple form of classification is Binary Classification, where one of two labels can be chosen from. Some use cases are image classification, spam filtering, or even medical diagnosis. One tough part with classification is especially with supervised learning techniques, the data has to be labeled into the categories which requires manual effort.

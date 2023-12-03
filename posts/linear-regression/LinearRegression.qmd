@@ -1,5 +1,8 @@
 ---
-title: What is Linear Regression?
+title: "Linear Regression"
+author: "Kaustubh Kale"
+date: "2023-11-26"
+categories: [news, code, analysis]
 jupyter: python3
 ---
 
