@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/clustering/Clustering.html",
       "/posts/nonlinear-regression/NonlinearRegression.html",
       "/posts/linear-regression/LinearRegression.html",
       "/posts/classification/Classification.html"
